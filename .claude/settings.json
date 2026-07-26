@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(jobs)",
+      "Bash(rm -rf .tamagui/*.cjs 2>/dev/null; yarn web)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8081,8082 -ErrorAction SilentlyContinue)",
+      "Bash(node -e ' *)",
+      "PowerShell(Stop-Process -Id 81732 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Id 53424 -Force -ErrorAction SilentlyContinue)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/react-native-reanimated/package.json'\\).version\\)\")",
+      "Bash(node -e \"const p=require\\('./node_modules/react-native-reanimated/package.json'\\); console.log\\(JSON.stringify\\(p.peerDependencies||{}, null, 2\\)\\); console.log\\(JSON.stringify\\(p.dependencies||{}, null,2\\)\\)\")",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/react-native-worklets/package.json'\\).version\\)\")",
+      "Bash(node -e \"const p=require\\('./node_modules/react-native-reanimated/package.json'\\); console.log\\(JSON.stringify\\({main:p.main,module:p.module,browser:p.browser,'react-native':p['react-native'],exports:p.exports}, null, 2\\)\\)\")",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8081 -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Id 81128 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8081 -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty OwningProcess | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; Start-Sleep -Milliseconds 500)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8081/)",
+      "Bash(curl -s http://localhost:8081/)",
+      "Bash(chromium-cli --help)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(npx --no-install puppeteer --version)",
+      "Bash(npx patch-package *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\danie\\Documents\\storefront-app\\.tamagui"
+    ]
+  }
+}

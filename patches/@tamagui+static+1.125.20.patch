@@ -1,0 +1,13 @@
+diff --git a/node_modules/@tamagui/static/dist/extractor/bundle.js b/node_modules/@tamagui/static/dist/extractor/bundle.js
+index 830e258..c4a993a 100644
+--- a/node_modules/@tamagui/static/dist/extractor/bundle.js
++++ b/node_modules/@tamagui/static/dist/extractor/bundle.js
+@@ -103,6 +103,8 @@ function getESBuildConfig({ entryPoints, resolvePlatformSpecificEntries, ...opti
+           })), build.onResolve({ filter: /react-native-reanimated/ }, (args) => ({
+             path: "react-native-reanimated",
+             external: !0
++          })), build.onResolve({ filter: /^react-native-config$/ }, (args) => ({
++            path: import_node_path.join(process.cwd(), "web/react-native-config.static.js")
+           }));
+         }
+       },

@@ -74,6 +74,12 @@ module.exports = {
         static: {
             directory: path.resolve(__dirname, 'public'),
         },
+        client: {
+            overlay: {
+                errors: true,
+                warnings: false,
+            },
+        },
     },
     output: {
         filename: 'bundle.web.js',
@@ -97,7 +103,7 @@ module.exports = {
                         options: {
                             cacheDirectory: true,
                             presets: [
-                                ['@babel/preset-react', { plugins: ['@babel/plugin-proposal-class-properties'] }],
+                                ['@babel/preset-react', { plugins: ['@babel/plugin-transform-class-properties'] }],
                                 ['module:@react-native/babel-preset', { useTransformReactJSXExperimental: true }],
                                 '@babel/preset-typescript',
                             ],
@@ -114,24 +120,26 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx|ts|tsx)$/,
                 include: [
                     path.resolve(__dirname, 'node_modules/react-native-linear-gradient'),
                     path.resolve(__dirname, 'node_modules/react-native-maps'),
                     path.resolve(__dirname, 'node_modules/react-native-super-grid'),
                     path.resolve(__dirname, 'node_modules/react-native-community-blur'),
+                    path.resolve(__dirname, 'node_modules/react-native-qrcode-svg'),
+                    path.resolve(__dirname, 'node_modules/react-native-image-picker'),
                 ],
                 use: {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            ['@babel/preset-react', { plugins: ['@babel/plugin-proposal-class-properties'] }],
+                            ['@babel/preset-react', { plugins: ['@babel/plugin-transform-class-properties'] }],
                             ['@babel/preset-env', { loose: true }],
                             'module:@react-native/babel-preset',
                             '@babel/preset-typescript',
                         ],
                         plugins: [
-                            ['@babel/plugin-proposal-class-properties', { loose: true }],
+                            ['@babel/plugin-transform-class-properties', { loose: true }],
                             ['@babel/plugin-transform-private-methods', { loose: true }],
                             ['@babel/plugin-transform-private-property-in-object', { loose: true }],
                             'react-native-web',
@@ -149,6 +157,15 @@ module.exports = {
                         presets: ['module:@react-native/babel-preset'],
                         plugins: ['react-native-web'],
                     },
+                },
+            },
+            {
+                // react-native-worklets/reanimated ship ESM source with extensionless relative
+                // imports (e.g. `./threads`), which webpack 5 rejects under strict ESM "fully
+                // specified" resolution. Disabling it lets normal extension resolution apply.
+                test: /\.m?js$/,
+                resolve: {
+                    fullySpecified: false,
                 },
             },
             {
@@ -181,6 +198,7 @@ module.exports = {
             'react-native-config': path.resolve(__dirname, 'web/react-native-config.web.js'),
             'react-native-device-info': path.resolve(__dirname, 'web/react-native-device-info.web.js'),
             'react-native-fast-image': path.resolve(__dirname, 'web/react-native-fast-image.web.js'),
+            '@react-native-google-signin/google-signin': path.resolve(__dirname, 'web/react-native-google-signin.web.js'),
             '@react-native-community/blur': path.resolve(__dirname, 'web/react-native-community-blur.web.js'),
             '@fleetbase/storefront': path.resolve(__dirname, 'node_modules/@fleetbase/storefront/dist/esm/storefront.js'),
             '@fleetbase/sdk': path.resolve(__dirname, 'node_modules/@fleetbase/sdk/dist/esm/fleetbase.js'),

@@ -9,9 +9,12 @@ import { themes } from '../../tamagui.config';
 import { APP_THEME_KEY } from '../hooks/use-app-theme';
 import { pluralize } from 'inflected';
 import { countries } from 'countries-list';
-import StorefrontConfig from '../../storefront.config';
 
 export function storefrontConfig(key, defaultValue = null) {
+    // Lazy require: storefront.config.ts depends (transitively, via config/default.js)
+    // on this same module, so importing it at the top would create a circular import
+    // that resolves to `undefined` under webpack depending on load order.
+    const StorefrontConfig = require('../../storefront.config').default;
     return get(StorefrontConfig, key, defaultValue);
 }
 
